@@ -4,7 +4,7 @@ import resize from './routes/image_resize';
 const app = express();
 const port = 3000;
 
-app.get('/', (req, res) => {
+app.get('/', (req, res): void => {
   res.send('This is the default gateway. visit "/resize" to resize an image.');
   res.status(200).send;
 });

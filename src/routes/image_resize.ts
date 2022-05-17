@@ -1,7 +1,7 @@
 import express from 'express';
-import sharp from 'sharp';
 import path from 'path';
 import { existsSync } from 'fs';
+import process_image from '../utilities/image_process';
 
 const resize = express.Router();
 
@@ -46,7 +46,7 @@ resize.get(
       res.status(304).sendFile(resized_image_path);
       return;
     }
-    await sharp(image_path).resize(width, height).toFile(resized_image_path);
+    await process_image(image_path, resized_image_path, width, height);
     res.status(200).sendFile(resized_image_path);
     return;
   }
