@@ -1,7 +1,5 @@
 import app from '../index';
 import supertest from 'supertest';
-import { unlinkSync } from 'fs';
-import path from 'path';
 
 const request = supertest(app);
 
@@ -21,10 +19,7 @@ describe('Testing resize endpoint', () => {
   it('should return an error if the file does not exist', () => {
     request.get('/resize?filename=fjorddd&height=300').expect(404);
   });
-  it('should return a cached image if the it', () => {
+  it('should return a cached image if the resized image already exists', () => {
     request.get('/resize?filename=fjord&height=300&width=250').expect(304);
-  });
-  afterAll(() => {
-    path.join(__dirname, '../../assets/thumb', 'fjord250_300.jpg');
   });
 });
